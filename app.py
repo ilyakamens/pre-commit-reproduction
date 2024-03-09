@@ -2,7 +2,7 @@ from flask import Blueprint, Flask, jsonify
 
 app = Flask(__name__)
 
-bp = Blueprint("haapi", __name__)
+bp = Blueprint("foo", __name__)
 
 
 @bp.route("/status")
