@@ -1,0 +1,6 @@
+#!/bin/sh
+
+set -e
+
+files=$(git diff --name-only --cached  --diff-filter=d)
+./docker-shell lint ${files}

@@ -1,0 +1,16 @@
+version: '3.7'
+
+networks:
+  default:
+    external: true
+    name: propel
+
+services:
+  foo:
+    container_name: foo
+    build: .
+    image: foo:dev
+    command: gunicorn app:app -c /app/gunicorn.conf.py --reload
+    restart: on-failure
+    volumes:
+      - .:/app

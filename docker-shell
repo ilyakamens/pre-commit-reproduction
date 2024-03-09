@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -e
+
+container="foo"
+
+if [[ -z $1 ]]; then
+  docker exec -it ${container} bash
+elif [[ "$1" == "lint" ]]; then
+  paths="${*:2}"
+  paths="${paths:-.}"
+  docker exec -t ${container} bash -c "cd /app && pre-commit run --files $paths"
+elif [[ "$1" == "update-requirements" ]]; then
+  docker exec -it ${container} bash -c "cd /app && pip-compile requirements.in"
+else
+  docker exec -it ${container} bash -c "$*"
+fi
